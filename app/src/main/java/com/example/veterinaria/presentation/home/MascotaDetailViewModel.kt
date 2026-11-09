@@ -28,10 +28,6 @@ class MascotaDetailViewModel(
         MutableStateFlow<MascotaDetailUiState>(MascotaDetailUiState.Loading)
     val uiState: StateFlow<MascotaDetailUiState> = _uiState.asStateFlow()
 
-    init {
-        cargarMascota()
-    }
-
     fun cargarMascota() {
         _uiState.value = MascotaDetailUiState.Loading
         viewModelScope.launch {
