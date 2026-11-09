@@ -8,6 +8,10 @@ import com.example.veterinaria.data.local.SharedPreferencesTokenManager
 import com.example.veterinaria.data.local.TokenManager
 import com.example.veterinaria.data.network.AuthInterceptor
 import com.example.veterinaria.data.network.MockInterceptor
+import com.example.veterinaria.data.repository.AuthRepository
+import com.example.veterinaria.data.repository.AuthRepositoryImpl
+import com.example.veterinaria.data.repository.MascotaRepository
+import com.example.veterinaria.data.repository.MascotaRepositoryImpl
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -78,6 +82,14 @@ object AppModule {
 
     val mascotaApiService: MascotaApiService by lazy {
         retrofit.create(MascotaApiService::class.java)
+    }
+
+    val authRepository: AuthRepository by lazy {
+        AuthRepositoryImpl(authApiService, tokenManager)
+    }
+
+    val mascotaRepository: MascotaRepository by lazy {
+        MascotaRepositoryImpl(mascotaApiService)
     }
 
     fun init(context: Context) {
